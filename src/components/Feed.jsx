@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
+import { Sidebar, Videos } from "./";
 
 const Feed = () => {
   return (
@@ -20,6 +20,20 @@ const Feed = () => {
         >
           Copyright 2023 JSM Media
         </Typography>
+      </Box>
+      <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+        <Typography
+          variant="h4"
+          fontWeight={"bold"}
+          mb={2}
+          sx={{
+            color: "#fff",
+          }}
+        >
+          New <span style={{ color: "#f31503" }}>videos</span>
+        </Typography>
+
+        <Videos video={[]} />
       </Box>
     </Stack>
   );
