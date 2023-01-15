@@ -1,7 +1,6 @@
+import React from "react";
 import { CheckCircle } from "@mui/icons-material";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { height } from "@mui/system";
-import React from "react";
 import { Link } from "react-router-dom";
 import {
   demoChannelTitle,
