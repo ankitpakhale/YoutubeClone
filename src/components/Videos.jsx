@@ -3,7 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { VideoCard, ChannelCard } from "./";
 
 const Videos = ({ videos }) => {
-  // console.info(videos, "this is videos");
+  // co nsole.info(videos, "this is videos");
   return (
     <Stack direction={"row"} flexWrap="wrap" justifyContent={"start"} gap={2}>
       {videos
