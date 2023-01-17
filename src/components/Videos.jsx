@@ -3,10 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { VideoCard, ChannelCard } from "./";
 
 const Videos = ({ videos, direction }) => {
-
   if (!videos?.length) return "Loading...";
-
-  console.info(direction, "this is videos component");
 
   return (
     <Stack

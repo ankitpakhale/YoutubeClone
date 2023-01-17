@@ -9,6 +9,7 @@ const ChannelDetail = () => {
 
   const [channelDetail, setChannelDetail] = useState(null);
   const [videos, setVideos] = useState([]);
+  const tempVideos = [];
 
   useEffect(() => {
     fetchFromAPI(`channels?part=snippet&id=${id}`).then((data) =>
@@ -18,14 +19,27 @@ const ChannelDetail = () => {
     fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`).then(
       (data) => setVideos(data?.items)
     );
+
+    // fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`).then(
+    //   (data) =>
+    //     data?.items.map((i) =>
+    //       i.id.videoId
+    //         ? console.info(i, "matched")
+    //         : console.info(i, "lllllllllll")
+    //     )
+    // );
+    // console.info(tempVideos);
   }, [id]);
+
+  console.info(videos, "videos");
+
   return (
     <Box minHeight={"95vh"}>
       <Box>
         <div
           style={{
             background:
-              "radial-gradient(circle, rgba(255,140,8,1) 0%, rgba(255,75,75,1) 100%)",
+              "radial-gradient(circle, rgba(232,203,192,1) 0%, rgba(126,173,182,1) 50%, rgba(99,111,164,1) 100%)",
             zIndex: 10,
             height: "300px",
           }}
@@ -34,6 +48,7 @@ const ChannelDetail = () => {
       </Box>
       <Box display="flex" p="2">
         <Box sx={{ mr: { sm: "100px" } }} />
+
         <Videos videos={videos} />
       </Box>
     </Box>
