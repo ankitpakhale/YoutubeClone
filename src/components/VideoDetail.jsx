@@ -29,6 +29,15 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = videoDetail;
 
+  const handleWatchLater = () => {
+    localStorage.setItem("watchLater", JSON.stringify(videoDetail));
+    console.info("videoDetail");
+  };
+
+  const getWatchLater = () => {
+    console.info(JSON.parse(localStorage.getItem("watchLater")));
+  };
+
   return (
     <Box minHeight="95vh" sx={{ overflow: "auto", height: "110vh" }}>
       <Stack direction={{ xs: "column", md: "row" }}>
@@ -69,9 +78,12 @@ const VideoDetail = () => {
               <Stack direction="row" gap="20px" alignItems="center">
                 <Typography variant="body1">
                   <span
-                    onClick={() => console.info("clicked on watch later")}
+                    onClick={() => handleWatchLater()}
                     class="material-icons"
                   >
+                    watch_later
+                  </span>
+                  <span onClick={() => getWatchLater()} class="material-icons">
                     watch_later
                   </span>
                 </Typography>
