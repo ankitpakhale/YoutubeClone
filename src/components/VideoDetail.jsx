@@ -10,6 +10,7 @@ import { fetchFromAPI } from "../utils/fetchFileFromAPI";
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
   const [videos, setVideos] = useState(null);
+  const [isWatchLater, setIsWatchLater] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +23,13 @@ const VideoDetail = () => {
     );
   }, [id]);
 
+  useEffect(() => {
+    const watchLaterData = JSON.parse(localStorage.getItem(`watchLater${id}`));
+    if (watchLaterData) {
+      setIsWatchLater(true);
+    }
+  });
+
   if (!videoDetail?.snippet) return "Loading...";
 
   const {
@@ -29,13 +37,26 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = videoDetail;
 
-  const handleWatchLater = () => {
-    localStorage.setItem("watchLater", JSON.stringify(videoDetail));
-    console.info("videoDetail");
+  const handleWatchLater = (title) => {
+    console.info(isWatchLater);
+    if (!isWatchLater) {
+      localStorage.setItem(`watchLater${id}`, JSON.stringify(videoDetail));
+      setIsWatchLater(true);
+    } else {
+      localStorage.removeItem(`watchLater${id}`, JSON.stringify(videoDetail));
+      setIsWatchLater(false);
+    }
+    alert(
+      isWatchLater
+        ? `${title} | Removed from watch later`
+        : `${title} | Added to watch later`
+    );
   };
 
   const getWatchLater = () => {
-    console.info(JSON.parse(localStorage.getItem("watchLater")));
+    console.info(
+      JSON.parse(localStorage.getItem(`watchLater${videoDetail.id}`))
+    );
   };
 
   return (
@@ -78,13 +99,10 @@ const VideoDetail = () => {
               <Stack direction="row" gap="20px" alignItems="center">
                 <Typography variant="body1">
                   <span
-                    onClick={() => handleWatchLater()}
+                    onClick={() => handleWatchLater(title)}
                     class="material-icons"
                   >
-                    watch_later
-                  </span>
-                  <span onClick={() => getWatchLater()} class="material-icons">
-                    watch_later
+                    {isWatchLater ? "watch" : "watch_later"}
                   </span>
                 </Typography>
                 <Typography variant="body1" sx={{ opacity: 0.7 }}>
