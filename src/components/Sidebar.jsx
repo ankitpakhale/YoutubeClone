@@ -1,8 +1,7 @@
-import { useSelect } from "@mui/base";
-import { Opacity } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import React from "react";
 import { categories } from "../utils/constants";
+import { FaTasks } from "react-icons/fa";
 
 const Sidebar = (props) => {
   const { selectedCategory, setSelectedCategory } = props;
@@ -15,6 +14,27 @@ const Sidebar = (props) => {
         flexDirection: { md: "column" },
       }}
     >
+      <button
+        onClick={() => setSelectedCategory("watchLater")}
+        className="category-btn"
+        style={{
+          background: "#fc1503",
+          color: "#fff",
+        }}
+      >
+        <span>
+          <FaTasks />
+        </span>
+        <span
+          style={{
+            marginLeft: "15px",
+            opacity: "1",
+          }}
+        >
+          Watch Later
+        </span>
+      </button>
+
       {categories.map((category) => (
         <button
           key={category.name}

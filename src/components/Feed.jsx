@@ -15,6 +15,13 @@ const Feed = () => {
     );
   }, [selectedCategory]);
 
+  const [watchLaterVideos, setWatchLaterVideos] = useState([]);
+
+  useEffect(() => {
+    var keyName = `watchLater`;
+    setWatchLaterVideos(JSON.parse(localStorage.getItem(keyName)));
+  }, []);
+
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
@@ -49,6 +56,10 @@ const Feed = () => {
         </Typography>
 
         <Videos videos={videos} />
+
+        {selectedCategory === "watchLater" && (
+          <Videos videos={watchLaterVideos} />
+        )}
       </Box>
     </Stack>
   );
