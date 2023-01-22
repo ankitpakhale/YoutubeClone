@@ -6,6 +6,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Videos } from "./";
 // import { fetchFromAPI } from "../utils/fetchFromAPI";
 import { fetchFromAPI } from "../utils/fetchFileFromAPI";
+import { FaClock, FaRegStopCircle } from "react-icons/fa";
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
@@ -102,7 +103,7 @@ const VideoDetail = () => {
                     onClick={() => handleWatchLater(title)}
                     class="material-icons"
                   >
-                    {isWatchLater ? "watch" : "watch_later"}
+                    {isWatchLater ? <FaRegStopCircle /> : <FaClock />}
                   </span>
                 </Typography>
                 <Typography variant="body1" sx={{ opacity: 0.7 }}>
