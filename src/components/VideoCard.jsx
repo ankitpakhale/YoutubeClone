@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CheckCircle } from "@mui/icons-material";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -10,12 +10,17 @@ import {
   demoVideoUrl,
 } from "../utils/constants";
 
-const VideoCard = ({
-  video: {
-    id: { videoId },
-    snippet,
-  },
-}) => {
+const VideoCard = (item, selectedCategory) => {
+  useEffect(() => {
+    console.info(selectedCategory, "this is selectedCategory ");
+  }, []);
+  const {
+    video: {
+      id: { videoId },
+      snippet,
+    },
+  } = item;
+
   return (
     <Card
       sx={{

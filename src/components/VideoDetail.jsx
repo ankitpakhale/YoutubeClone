@@ -38,8 +38,10 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = videoDetail;
 
+  console.info(videoDetail, "videoDetail");
+
   const handleWatchLater = (title) => {
-    console.info(isWatchLater);
+    console.info(videoDetail, "handle watch later");
     if (!isWatchLater) {
       localStorage.setItem(`watchLater${id}`, JSON.stringify(videoDetail));
       setIsWatchLater(true);

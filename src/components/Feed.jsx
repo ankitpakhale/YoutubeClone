@@ -71,10 +71,9 @@ const Feed = () => {
         <Videos videos={videos} />
 
         {/* {selectedCategory !== "watchLater" && <Videos videos={videos} />}
-        {selectedCategory === "watchLater" &&
-          watchLaterVideos.map((data) => {
-            <VideoDetail video={data} />;
-          })} */}
+        {selectedCategory === "watchLater" && (
+          <VideoCard selectedCategory video={watchLaterVideos} />
+        )} */}
       </Box>
     </Stack>
   );
