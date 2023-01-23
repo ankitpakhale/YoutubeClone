@@ -1,26 +1,39 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Sidebar, Videos } from "./";
-
+import { Sidebar, VideoCard, VideoDetail, Videos } from "./";
 import { fetchFromAPI } from "../utils/fetchFileFromAPI";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState(null);
-
-  useEffect(() => {
-    setVideos(null);
-    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then((data) =>
-      setVideos(data.items)
-    );
-  }, [selectedCategory]);
-
   const [watchLaterVideos, setWatchLaterVideos] = useState([]);
 
+  console.info(selectedCategory, "selectedCategory");
+
+  const HandleVideos = () => {
+    setVideos(null);
+    if (selectedCategory === "watchLater") {
+      var watchLaterList = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+      while (i--) {
+        watchLaterList.push(JSON.parse(localStorage.getItem(keys[i])));
+      }
+      console.info(watchLaterList, "values");
+      if (watchLaterList) {
+        // setWatchLaterVideos(watchLaterList);
+        setVideos(watchLaterList);
+      }
+    } else {
+      fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then((data) =>
+        setVideos(data.items)
+      );
+    }
+  };
+
   useEffect(() => {
-    var keyName = `watchLater`;
-    setWatchLaterVideos(JSON.parse(localStorage.getItem(keyName)));
-  }, []);
+    HandleVideos();
+  }, [selectedCategory]);
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
@@ -57,9 +70,11 @@ const Feed = () => {
 
         <Videos videos={videos} />
 
-        {selectedCategory === "watchLater" && (
-          <Videos videos={watchLaterVideos} />
-        )}
+        {/* {selectedCategory !== "watchLater" && <Videos videos={videos} />}
+        {selectedCategory === "watchLater" &&
+          watchLaterVideos.map((data) => {
+            <VideoDetail video={data} />;
+          })} */}
       </Box>
     </Stack>
   );
